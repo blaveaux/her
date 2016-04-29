@@ -5,7 +5,7 @@ describe Her::Middleware::JsonApiParser do
   subject { described_class.new }
 
   context "with valid JSON body" do
-    let(:body) { '{"data": {"type": "foo", "id": "bar", "attributes": {"baz": "qux"} }, "meta": {"api": "json api"} }' }
+    let(:body) { '{"data": {"type": "foo", "id": "bar", "attributes": {"baz": "qux", "tar-var": "bzh"} }, "meta": {"api": "json api"} }' }
     let(:env) { { body: body } }
 
     it "parses body as json" do
@@ -14,7 +14,7 @@ describe Her::Middleware::JsonApiParser do
         expect(json[:data]).to eql(
           :type => "foo",
           :id => "bar",
-          :attributes => { :baz => "qux" } 
+          :attributes => { :baz => "qux", :tar_var => "bzh" }
         )
         expect(json[:errors]).to eql([])
         expect(json[:metadata]).to eql(:api => "json api")
